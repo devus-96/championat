@@ -1,0 +1,214 @@
+/* ==========================================================================
+   base.css : design tokens (variables), remise à zéro, typographie, focus
+   Mobile d'abord : les règles de base visent 360 px, les @media élargissent.
+   ========================================================================== */
+
+:root {
+  /* --- Couleurs de la marque --- */
+  --vert: #0b6e4f;            /* primaire (contraste 6,2:1 sur blanc) */
+  --vert-hover: #095c42;
+  --vert-fonce: #08392b;      /* en-tête, pied de page, bandeaux */
+  --vert-fonce-2: #0c4a38;    /* variante pour les dégradés sur fond foncé */
+  --vert-pale: #e3f1eb;       /* fond de mise en évidence (zone de tête) */
+  --jaune: #f2c400;           /* accent maillot (utilisé en fond, jamais en texte sur clair) */
+  --jaune-hover: #d9b000;
+  --jaune-pale: #fff6cc;
+
+  /* --- Neutres --- */
+  --fond: #f6f8f7;
+  --surface: #ffffff;
+  --surface-2: #eef2f0;       /* lignes alternées, squelettes */
+  --encre: #14201b;           /* texte principal (16:1 sur fond) */
+  --encre-2: #52605a;         /* texte secondaire (5,9:1 sur fond) */
+  --bordure: #d5dcd8;         /* séparateurs décoratifs */
+  --bordure-champ: #7a8a83;   /* contour des champs (3,6:1, exigé pour les composants) */
+  --sur-fonce: #ffffff;       /* texte sur fond vert foncé */
+  --sur-fonce-2: #c4d6cf;     /* texte secondaire sur fond vert foncé (9:1) */
+
+  /* --- États --- */
+  --rouge: #d62828;           /* carton rouge, erreur (5:1 sur blanc) */
+  --rouge-pale: #fdecec;
+  --rouge-texte: #b71f1f;     /* texte d'erreur, y compris sur fond rouge pâle (5,6:1) */
+  --succes: #1e9e6a;          /* remplissage d'icône / barre uniquement */
+  --succes-texte: #157a52;    /* texte de succès (5,3:1 sur blanc) */
+  --succes-pale: #e4f5ed;
+  --podium-or: #f2c400;
+  --podium-argent: #9aa5a0;
+  --podium-bronze: #c27c3e;
+
+  /* --- Typographie --- */
+  --police-titre: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --police-texte: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --taille-xs: 0.75rem;   /* 12 px : mentions légales, micro-libellés */
+  --taille-s: 0.875rem;   /* 14 px */
+  --taille-m: 1rem;       /* 16 px : texte courant */
+  --taille-l: 1.25rem;    /* 20 px */
+  --taille-xl: 1.5rem;    /* 24 px */
+  --taille-2xl: 2rem;     /* 32 px */
+  --taille-3xl: 3rem;     /* 48 px */
+  --interligne: 1.5;
+
+  /* --- Espacements (grille de 4 px) --- */
+  --esp-1: 0.25rem;   /* 4 */
+  --esp-2: 0.5rem;    /* 8 */
+  --esp-3: 0.75rem;   /* 12 */
+  --esp-4: 1rem;      /* 16 */
+  --esp-6: 1.5rem;    /* 24 */
+  --esp-8: 2rem;      /* 32 */
+  --esp-12: 3rem;     /* 48 */
+
+  /* --- Formes et profondeur --- */
+  --rayon: 8px;
+  --rayon-s: 4px;
+  --rayon-pastille: 999px;
+  --ombre-1: 0 1px 2px rgb(20 32 27 / 0.06), 0 1px 3px rgb(20 32 27 / 0.08);
+  --ombre-2: 0 4px 12px rgb(20 32 27 / 0.10);
+
+  /* --- Mouvement --- */
+  --duree: 160ms;
+  --courbe: cubic-bezier(0.2, 0, 0, 1);
+
+  /* --- Mise en page --- */
+  --largeur-max: 72rem;
+  --hauteur-entete: 3.5rem;
+  --cible-tactile: 44px;
+}
+
+/* ---------- Remise à zéro légère ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--hauteur-entete) + var(--esp-4)); /* ancres sous l'en-tête collant */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--police-texte);
+  font-size: var(--taille-m);
+  line-height: var(--interligne);
+  color: var(--encre);
+  background: var(--fond);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* sécurité : jamais de défilement horizontal de la page */
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+p {
+  margin: 0 0 var(--esp-4);
+}
+
+/* ---------- Titres ---------- */
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 var(--esp-3);
+  font-family: var(--police-titre);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+h1 { font-size: var(--taille-2xl); }
+h2 { font-size: var(--taille-xl); }
+h3 { font-size: var(--taille-l); }
+h4 { font-size: var(--taille-m); }
+
+@media (min-width: 640px) {
+  h1 { font-size: var(--taille-3xl); }
+  h2 { font-size: var(--taille-2xl); }
+}
+
+a {
+  color: var(--vert);
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--vert-hover);
+}
+
+/* Chiffres alignés dans les tableaux, scores, statistiques */
+.chiffres {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Focus visible (clavier) ---------- */
+/* Vert sur fond clair ; les zones foncées passent l'anneau en jaune (voir .zone-foncee) */
+:focus-visible {
+  outline: 3px solid var(--vert);
+  outline-offset: 2px;
+  border-radius: var(--rayon-s);
+}
+
+.zone-foncee :focus-visible {
+  outline-color: var(--jaune);
+}
+
+/* ---------- Utilitaires d'accessibilité ---------- */
+.visuellement-cache {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Lien « Aller au contenu » : invisible tant qu'il n'a pas le focus */
+.lien-evitement {
+  position: absolute;
+  top: var(--esp-2);
+  left: var(--esp-2);
+  z-index: 100;
+  padding: var(--esp-3) var(--esp-4);
+  font-weight: 600;
+  color: var(--encre);
+  background: var(--jaune);
+  border-radius: var(--rayon);
+  transform: translateY(-200%);
+  transition: transform var(--duree) var(--courbe);
+}
+
+.lien-evitement:focus {
+  transform: translateY(0);
+  outline: 3px solid var(--encre);
+}
+
+/* ---------- Mouvement réduit ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Écusson du championnat : bouclier vert, liseré jaune, ballon stylisé -->
+  <path d="M3 3h26v13c0 7.5-6 11.8-13 14C9 27.8 3 23.5 3 16Z" fill="#0b6e4f" stroke="#f2c400" stroke-width="2"/>
+  <circle cx="16" cy="15" r="7" fill="#fff"/>
+  <path d="m16 11.2 3.4 2.5-1.3 4h-4.2l-1.3-4Z" fill="#14201b"/>
+  <path d="M16 8v3.2M19.4 13.7l3.1-1M18.1 17.7l1.9 2.6M13.9 17.7 12 20.3M12.6 13.7l-3.1-1" stroke="#14201b" stroke-width="1.2"/>
+</svg>

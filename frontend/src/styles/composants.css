@@ -1,0 +1,765 @@
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-2);
+  min-height: var(--cible-tactile);
+  padding: var(--esp-2) var(--esp-4);
+  font-weight: 600;
+  font-size: var(--taille-s);
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 2px solid transparent;
+  border-radius: var(--rayon);
+  transition: background-color var(--duree) var(--courbe), border-color var(--duree) var(--courbe),
+    color var(--duree) var(--courbe), transform var(--duree) var(--courbe);
+}
+
+.bouton:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.bouton:disabled,
+.bouton[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.bouton svg {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* Primaire : action principale de la page (une seule par zone) */
+.bouton--primaire {
+  color: #fff;
+  background: var(--vert);
+}
+.bouton--primaire:hover:not(:disabled) {
+  color: #fff;
+  background: var(--vert-hover);
+}
+
+/* Accent : appel à l'action sur fond foncé (hero) */
+.bouton--accent {
+  color: var(--encre);
+  background: var(--jaune);
+}
+.bouton--accent:hover:not(:disabled) {
+  color: var(--encre);
+  background: var(--jaune-hover);
+}
+
+/* Secondaire : contour vert */
+.bouton--secondaire {
+  color: var(--vert);
+  background: var(--surface);
+  border-color: var(--vert);
+}
+.bouton--secondaire:hover:not(:disabled) {
+  color: var(--vert-hover);
+  background: var(--vert-pale);
+}
+
+/* Fantôme : action tertiaire, sans fond */
+.bouton--fantome {
+  color: var(--vert);
+  background: transparent;
+}
+.bouton--fantome:hover:not(:disabled) {
+  background: var(--vert-pale);
+}
+
+/* Danger : suppression (toujours avec confirmation) */
+.bouton--danger {
+  color: var(--rouge);
+  background: var(--surface);
+  border-color: var(--rouge);
+}
+.bouton--danger:hover:not(:disabled) {
+  color: #fff;
+  background: var(--rouge);
+}
+.bouton--danger-plein {
+  color: #fff;
+  background: var(--rouge);
+}
+.bouton--danger-plein:hover:not(:disabled) {
+  background: var(--rouge-texte);
+}
+
+/* Variante sur fond foncé */
+.bouton--clair {
+  color: var(--sur-fonce);
+  background: transparent;
+  border-color: rgb(255 255 255 / 0.5);
+}
+.bouton--clair:hover:not(:disabled) {
+  color: var(--sur-fonce);
+  background: rgb(255 255 255 / 0.1);
+  border-color: #fff;
+}
+
+.bouton--petit {
+  min-height: 36px;
+  padding: var(--esp-1) var(--esp-3);
+}
+
+/* Bouton carré ne contenant qu'une icône (libellé en .visuellement-cache) */
+.bouton--icone {
+  width: var(--cible-tactile);
+  padding: 0;
+}
+
+.bouton--bloc {
+  width: 100%;
+}
+
+/* Indicateur de chargement dans un bouton désactivé pendant l'envoi */
+.bouton__chargeur {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: rotation 700ms linear infinite;
+}
+
+@keyframes rotation {
+  to { transform: rotate(360deg); }
+}
+
+/* Lien « Voir tout » avec flèche */
+.lien-fleche {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  min-height: var(--cible-tactile);
+  font-weight: 600;
+  font-size: var(--taille-s);
+  text-decoration: none;
+}
+.lien-fleche svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform var(--duree) var(--courbe);
+}
+.lien-fleche:hover svg {
+  transform: translateX(3px);
+}
+.carte {
+  background: var(--surface);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre-1);
+}
+
+.carte__entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  padding: var(--esp-3) var(--esp-4);
+  border-bottom: 1px solid var(--bordure);
+}
+
+.carte__titre {
+  margin: 0;
+  font-size: var(--taille-l);
+}
+
+.carte__corps {
+  padding: var(--esp-4);
+}
+
+.carte__pied {
+  padding: var(--esp-2) var(--esp-4);
+  border-top: 1px solid var(--bordure);
+}
+
+/* Carte cliquable : tout le bloc est un lien */
+.carte--lien {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--duree) var(--courbe), box-shadow var(--duree) var(--courbe),
+    transform var(--duree) var(--courbe);
+}
+.carte--lien:hover {
+  color: inherit;
+  border-color: var(--vert);
+  box-shadow: var(--ombre-2);
+}
+.carte--lien:focus-visible {
+  border-color: var(--vert);
+}
+
+/* ==========================================================================
+   3. PASTILLE (badge) et CARTON
+   ========================================================================== */
+.pastille {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  padding: 2px var(--esp-2);
+  font-size: var(--taille-xs);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-radius: var(--rayon-pastille);
+  color: var(--encre-2);
+  background: var(--surface-2);
+}
+
+.pastille--termine {
+  color: var(--succes-texte);
+  background: var(--succes-pale);
+}
+
+.pastille--a-jouer {
+  color: #6b5600;          /* 6,4:1 sur le jaune pâle */
+  background: var(--jaune-pale);
+}
+
+.pastille--erreur {
+  color: var(--rouge-texte);
+  background: var(--rouge-pale);
+}
+
+.pastille--fonce {
+  color: var(--encre);
+  background: var(--jaune);
+}
+
+/* Point de couleur devant le libellé */
+.pastille__point {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Carton jaune / rouge : petit rectangle façon arbitre */
+.carton {
+  display: inline-block;
+  flex: none;
+  width: 0.75rem;
+  height: 1rem;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.15);
+  vertical-align: middle;
+}
+.carton--jaune { background: var(--jaune); }
+.carton--rouge { background: var(--rouge); }
+
+/* ==========================================================================
+   4. TABLEAU
+   ========================================================================== */
+/* Le conteneur défile horizontalement : la page, elle, ne défile jamais */
+.tableau-conteneur {
+  position: relative;      /* retient les libellés .visuellement-cache (absolus) dans la zone défilante */
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre-1);
+  -webkit-overflow-scrolling: touch;
+}
+
+.tableau {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--taille-s);
+  font-variant-numeric: tabular-nums;
+}
+
+.tableau caption {
+  padding: var(--esp-3) var(--esp-4);
+  text-align: left;
+  font-size: var(--taille-s);
+  color: var(--encre-2);
+}
+
+.tableau th,
+.tableau td {
+  padding: var(--esp-3);
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--bordure);
+}
+
+.tableau thead th {
+  position: sticky;
+  top: 0;
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--encre-2);
+  background: var(--surface-2);
+}
+
+.tableau tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+/* Lignes alternées discrètes */
+.tableau tbody tr:nth-child(even) > * {
+  background: #fafbfb;
+}
+
+.tableau tbody tr:hover > * {
+  background: var(--vert-pale);
+}
+
+.tableau .gauche {
+  text-align: left;
+}
+
+.tableau .fort {
+  font-weight: 700;
+}
+
+/* En-tête triable : le <th> porte aria-sort, le bouton reçoit le clic et le focus */
+.tableau__tri {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 32px;
+  padding: 0 var(--esp-1);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-radius: var(--rayon-s);
+}
+.tableau__tri:hover {
+  color: var(--vert);
+}
+.tableau__fleche {
+  display: inline-block;
+  width: 0.75em;
+  font-size: 0.85em;
+  opacity: 0.35;
+}
+[aria-sort='ascending'] .tableau__fleche,
+[aria-sort='descending'] .tableau__fleche {
+  opacity: 1;
+  color: var(--vert);
+}
+[aria-sort='ascending'],
+[aria-sort='descending'] {
+  color: var(--encre);
+}
+
+/* Colonne figée (équipe / joueur) lors du défilement horizontal */
+.tableau .fige {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--surface);
+  box-shadow: 1px 0 0 var(--bordure);
+}
+.tableau thead .fige {
+  z-index: 2;
+  background: var(--surface-2);
+}
+
+/* ==========================================================================
+   5. CHAMP DE FORMULAIRE
+   ========================================================================== */
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  min-width: 0;
+}
+
+.champ__label {
+  font-size: var(--taille-s);
+  font-weight: 600;
+}
+
+.champ__obligatoire {
+  color: var(--rouge);
+}
+
+.champ__controle {
+  width: 100%;
+  min-height: var(--cible-tactile);
+  padding: var(--esp-2) var(--esp-3);
+  background: var(--surface);
+  border: 1px solid var(--bordure-champ);
+  border-radius: var(--rayon);
+  transition: border-color var(--duree) var(--courbe), box-shadow var(--duree) var(--courbe);
+}
+
+.champ__controle:hover {
+  border-color: var(--encre-2);
+}
+
+.champ__controle:focus-visible {
+  outline: none;
+  border-color: var(--vert);
+  box-shadow: 0 0 0 3px rgb(11 110 79 / 0.35);
+}
+
+select.champ__controle {
+  appearance: none;
+  padding-right: var(--esp-8);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2352605a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--esp-3) center;
+}
+
+.champ__controle[aria-invalid='true'] {
+  border-color: var(--rouge);
+  box-shadow: 0 0 0 1px var(--rouge);
+}
+
+.champ__aide {
+  font-size: var(--taille-s);
+  color: var(--encre-2);
+}
+
+.champ__erreur {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--esp-1);
+  font-size: var(--taille-s);
+  font-weight: 500;
+  color: var(--rouge-texte);
+}
+.champ__erreur svg {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 2px;
+}
+
+/* Grille de formulaire : 1 colonne sur mobile */
+.formulaire {
+  display: grid;
+  gap: var(--esp-4);
+}
+
+.formulaire__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+  align-items: center;
+}
+
+/* ==========================================================================
+   6. TOAST (= messages flash)
+   ========================================================================== */
+.toasts {
+  position: fixed;
+  right: var(--esp-4);
+  bottom: var(--esp-4);
+  left: var(--esp-4);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .toasts {
+    left: auto;
+    width: 24rem;
+  }
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--esp-3);
+  padding: var(--esp-3) var(--esp-3) var(--esp-3) var(--esp-4);
+  color: var(--encre);
+  background: var(--surface);
+  border: 1px solid var(--bordure);
+  border-left: 4px solid var(--succes);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre-2);
+  pointer-events: auto;
+  animation: toast-entree 180ms var(--courbe);
+}
+
+.toast--erreur {
+  border-left-color: var(--rouge);
+}
+
+.toast__icone {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 2px;
+  color: var(--succes-texte);
+}
+.toast--erreur .toast__icone {
+  color: var(--rouge);
+}
+
+.toast__texte {
+  flex: 1;
+  margin: 0;
+  padding-top: 1px;
+  font-size: var(--taille-s);
+}
+
+.toast__fermer {
+  flex: none;
+  margin: calc(var(--esp-2) * -1) calc(var(--esp-2) * -1) calc(var(--esp-2) * -1) 0;
+  color: var(--encre-2);
+}
+
+@keyframes toast-entree {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* ==========================================================================
+   7. SQUELETTE (chargement)
+   ========================================================================== */
+.squelette {
+  display: block;
+  height: 1em;
+  border-radius: var(--rayon-s);
+  background: linear-gradient(90deg, var(--surface-2) 0%, #e2e8e5 40%, var(--surface-2) 80%);
+  background-size: 300% 100%;
+  animation: squelette-vague 1.4s ease-in-out infinite;
+}
+
+.squelette--titre {
+  width: 40%;
+  height: 1.5rem;
+}
+
+.squelette--ligne {
+  height: 2.75rem;
+  border-radius: 0;
+}
+
+.squelette--bloc {
+  height: 7rem;
+  border-radius: var(--rayon);
+}
+
+.squelette-liste {
+  display: grid;
+  gap: var(--esp-3);
+}
+
+.squelette-tableau {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+}
+
+@keyframes squelette-vague {
+  from { background-position: 100% 0; }
+  to { background-position: -50% 0; }
+}
+
+/* ==========================================================================
+   8. ÉTATS : vide / erreur
+   ========================================================================== */
+.etat-vide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-2);
+  padding: var(--esp-8) var(--esp-4);
+  text-align: center;
+  color: var(--encre-2);
+  background: var(--surface);
+  border: 1px dashed var(--bordure-champ);
+  border-radius: var(--rayon);
+}
+
+.etat-vide__illustration {
+  width: 96px;
+  height: auto;
+  margin-bottom: var(--esp-2);
+}
+
+.etat-vide__titre {
+  margin: 0;
+  font-family: var(--police-titre);
+  font-weight: 700;
+  font-size: var(--taille-xl);
+  color: var(--encre);
+}
+
+.etat-vide__texte {
+  max-width: 32rem;
+  margin: 0;
+  font-size: var(--taille-s);
+}
+
+.bandeau-erreur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-3);
+  padding: var(--esp-3) var(--esp-4);
+  color: var(--encre);
+  background: var(--rouge-pale);
+  border: 1px solid #f3b9b9;
+  border-left: 4px solid var(--rouge);
+  border-radius: var(--rayon);
+}
+
+.bandeau-erreur__icone {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--rouge);
+}
+
+.bandeau-erreur__texte {
+  flex: 1 1 12rem;
+  margin: 0;
+  font-size: var(--taille-s);
+}
+
+/* ==========================================================================
+   9. ÉCUSSON d'équipe (image SVG générée aux couleurs du club)
+   ========================================================================== */
+.ecusson {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+.ecusson--s { width: 1.5rem; height: 1.5rem; }
+.ecusson--l { width: 3rem; height: 3rem; }
+.ecusson--xl { width: 5rem; height: 5rem; }
+
+/* Équipe : écusson + nom alignés */
+.equipe-nom {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  min-width: 0;
+  font-weight: 600;
+}
+.equipe-nom__texte {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a.equipe-nom {
+  color: var(--encre);
+  text-decoration: none;
+}
+a.equipe-nom:hover .equipe-nom__texte {
+  color: var(--vert);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   10. EN-TÊTE DE SECTION (titre + « Voir tout »)
+   ========================================================================== */
+.section {
+  margin-bottom: var(--esp-8);
+}
+
+.section__entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--esp-2) var(--esp-4);
+  margin-bottom: var(--esp-4);
+}
+
+.section__titre {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  margin: 0;
+  font-size: var(--taille-xl);
+  text-transform: uppercase;
+}
+
+/* Petite barre jaune devant les titres de section */
+.section__titre::before {
+  content: '';
+  width: 4px;
+  height: 1em;
+  border-radius: 2px;
+  background: var(--jaune);
+}
+
+/* Libellé discret au-dessus d'un titre (surtitre) */
+.surtitre {
+  margin: 0 0 var(--esp-1);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--encre-2);
+}
+
+/* ==========================================================================
+   11. CLASSEMENT : podium, zone de tête, rang, forme
+   ========================================================================== */
+.classement__rang {
+  width: 3rem;
+  font-weight: 700;
+}
+
+/* Fine barre colorée à gauche pour le podium (portée par la 1re cellule) */
+.ligne--podium-1 > :first-child { box-shadow: inset 4px 0 0 var(--podium-or); }
+.ligne--podium-2 > :first-child { box-shadow: inset 4px 0 0 var(--podium-argent); }
+.ligne--podium-3 > :first-child { box-shadow: inset 4px 0 0 var(--podium-bronze); }
+
+/* Zone de tête (3 premiers) : fond vert très pâle */
+.tableau tbody tr.ligne--tete > * {
+  background: #f1f8f5;
+}
+.tableau tbody tr.ligne--tete:hover > * {
+  background: var(--vert-pale);
+}
+
+.classement__pts {
+  font-size: var(--taille-m);
+  font-weight: 800;
+}
+
+.diff--positive { color: var(--succes-texte); }
+.diff--negative { color: var(--rouge-texte); }
+
+.legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2) var(--esp-4);
+  margin: var(--esp-3) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--taille-s);
+  color: var(--encre-2);
+}
+.legende__element {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+}
+.legende__marque {
+  width: 4px;
+  height: 1rem;
+  border-radius: 2px;
+}

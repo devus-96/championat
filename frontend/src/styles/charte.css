@@ -1,0 +1,10 @@
+/* charte.css : mise en page de la page « Charte graphique » (développement uniquement) */
+.charte section { margin-bottom: var(--esp-12); }
+.charte__nuancier { display: grid; gap: var(--esp-3); grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); }
+.charte__nuance { overflow: hidden; font-size: var(--taille-s); }
+.charte__echantillon { height: 4rem; border-bottom: 1px solid var(--bordure); }
+.charte__nuance p { margin: 0; padding: var(--esp-2) var(--esp-3); }
+.charte__nuance code { font-size: var(--taille-xs); color: var(--encre-2); }
+.charte__ligne { display: flex; flex-wrap: wrap; gap: var(--esp-3); align-items: center; margin-bottom: var(--esp-4); }
+.charte__echelle p { margin: 0 0 var(--esp-2); line-height: 1.2; }
+.charte__fonce { padding: var(--esp-4); border-radius: var(--rayon); background: var(--vert-fonce); }

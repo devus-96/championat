@@ -1,0 +1,632 @@
+/* ==========================================================================
+   pages.css : composants métier (match, équipe, statistiques, administration)
+   Mobile d'abord ; points de rupture 640 px et 1024 px comme le reste du site.
+   ========================================================================== */
+
+.liste-nue {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.texte-discret {
+  font-weight: 400;
+  color: var(--encre-2);
+}
+
+/* ---------- Carte de match ---------- */
+.liste-matchs {
+  display: grid;
+  gap: var(--esp-3);
+}
+
+.carte-match {
+  padding: var(--esp-3) var(--esp-4);
+}
+
+.carte-match__infos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-1) var(--esp-3);
+  margin-bottom: var(--esp-3);
+  font-size: var(--taille-s);
+  color: var(--encre-2);
+}
+
+.carte-match__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+}
+.carte-match__meta svg {
+  width: 1rem;
+  height: 1rem;
+}
+.carte-match__infos .pastille:last-child {
+  margin-left: auto;
+}
+
+/* Équipe dom (alignée à droite) | score | équipe ext (alignée à gauche) */
+.carte-match__affiche {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.carte-match__equipe {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--esp-2);
+  min-width: 0;
+  font-weight: 600;
+  text-align: right;
+}
+.carte-match__equipe--ext {
+  justify-content: flex-start;
+  text-align: left;
+}
+/* Mobile : le nom passe à la ligne plutôt que d'être tronqué ; une seule ligne dès 640 px */
+.carte-match__equipe .equipe-nom__texte {
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+@media (min-width: 640px) {
+  .carte-match__equipe .equipe-nom__texte { white-space: nowrap; }
+}
+@media (max-width: 639px) {
+  .carte-match__affiche { gap: var(--esp-2); }
+  .carte-match__score { min-width: 3.5rem; }
+}
+
+.carte-match__score {
+  min-width: 4.5rem;
+  padding: var(--esp-1) var(--esp-2);
+  font-family: var(--police-titre);
+  font-size: var(--taille-xl);
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  background: var(--vert-fonce);
+  border-radius: var(--rayon-s);
+}
+.carte-match__score--vide {
+  font-size: var(--taille-m);
+  text-transform: uppercase;
+  color: var(--encre-2);
+  background: var(--surface-2);
+}
+
+/* ---------- Accueil ---------- */
+.hero__chiffres {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--esp-3);
+  margin: 0;
+}
+.hero__chiffres > div {
+  padding: var(--esp-4) var(--esp-3);
+  text-align: center;
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: var(--rayon);
+}
+.hero__chiffres dt {
+  font-size: var(--taille-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sur-fonce-2);
+}
+.hero__chiffres dd {
+  margin: 0;
+  font-family: var(--police-titre);
+  font-size: var(--taille-3xl);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--jaune);
+}
+
+/* Les colonnes de grille ne doivent jamais s'élargir au-delà de l'écran à cause d'un contenu long */
+.grille-accueil > * {
+  min-width: 0;
+}
+
+.conteneur > .bandeau-erreur {
+  margin-bottom: var(--esp-6);
+}
+
+.liste-buteurs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.liste-buteurs__ligne {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  padding: var(--esp-3) var(--esp-4);
+  border-bottom: 1px solid var(--bordure);
+}
+.liste-buteurs__ligne:last-child {
+  border-bottom: 0;
+}
+.liste-buteurs__rang {
+  width: 1.5rem;
+  font-weight: 700;
+  color: var(--encre-2);
+}
+.liste-buteurs__joueur {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+.liste-buteurs__equipe {
+  font-size: var(--taille-s);
+  font-weight: 400;
+}
+a.liste-buteurs__equipe {
+  color: var(--encre-2);
+}
+.liste-buteurs__buts {
+  font-family: var(--police-titre);
+  font-size: var(--taille-xl);
+  font-weight: 700;
+  color: var(--vert);
+}
+
+/* ---------- Pages ---------- */
+.mise-a-jour {
+  margin: 0;
+  align-self: center;
+  font-size: var(--taille-s);
+  color: var(--encre-2);
+}
+
+.entete-page__actions .champ {
+  min-width: 9rem;
+}
+
+/* ---------- Détail d'un match ---------- */
+.detail-match__entete {
+  margin-bottom: var(--esp-6);
+  padding: var(--esp-6) var(--esp-4);
+  color: var(--sur-fonce);
+  background: var(--vert-fonce);
+  border-color: var(--vert-fonce);
+}
+
+.detail-match__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--esp-2) var(--esp-4);
+  margin-bottom: var(--esp-6);
+  font-size: var(--taille-s);
+  color: var(--sur-fonce-2);
+}
+.detail-match__meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+}
+.detail-match__meta svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.detail-match__affiche {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.detail-match__equipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-2);
+  font-family: var(--police-titre);
+  font-size: var(--taille-l);
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--sur-fonce);
+  text-decoration: none;
+}
+.detail-match__equipe:hover {
+  color: var(--jaune);
+}
+
+.detail-match__score {
+  margin: 0;
+  font-family: var(--police-titre);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .detail-match__score { font-size: 4.5rem; }
+  .detail-match__equipe { font-size: var(--taille-xl); }
+}
+
+.detail-match__a-jouer {
+  font-size: var(--taille-l);
+  text-transform: uppercase;
+  color: var(--jaune);
+}
+
+.detail-match__evenements {
+  display: grid;
+  gap: var(--esp-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.detail-match__evenements li {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+}
+.detail-match__evenements svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--vert);
+}
+.detail-match__minute {
+  margin-left: auto;
+  font-weight: 700;
+  color: var(--encre-2);
+}
+.detail-match__rien,
+.detail-match__info {
+  margin: 0;
+  color: var(--encre-2);
+}
+
+/* ---------- Équipes ---------- */
+.carte-equipe {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  height: 100%;
+  padding: var(--esp-4);
+}
+.carte-equipe__texte {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.carte-equipe__nom {
+  font-family: var(--police-titre);
+  font-size: var(--taille-l);
+  text-transform: uppercase;
+}
+.carte-equipe__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  font-size: var(--taille-s);
+  color: var(--encre-2);
+}
+.carte-equipe__meta svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+.carte-equipe__chevron {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--encre-2);
+}
+
+.fiche-equipe {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-4);
+  margin-bottom: var(--esp-6);
+}
+.fiche-equipe__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-1) var(--esp-4);
+  margin: var(--esp-2) 0 0;
+  color: var(--encre-2);
+}
+.fiche-equipe__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+}
+.fiche-equipe__meta svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Cases de chiffres (fiche équipe, tableau de bord) */
+.bilan {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--esp-3);
+  margin: 0 0 var(--esp-8);
+}
+@media (min-width: 640px) {
+  .bilan { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); }
+}
+.bilan__case {
+  padding: var(--esp-3) var(--esp-4);
+}
+.bilan__case dt {
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--encre-2);
+}
+.bilan__case dd {
+  margin: 0;
+  font-family: var(--police-titre);
+  font-size: var(--taille-2xl);
+  font-weight: 700;
+}
+
+.grille-fiche {
+  display: grid;
+  gap: var(--esp-6);
+}
+@media (min-width: 1024px) {
+  .grille-fiche { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+.effectif {
+  margin-bottom: var(--esp-4);
+}
+.effectif .tableau caption.effectif__poste {
+  font-family: var(--police-titre);
+  font-size: var(--taille-l);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--encre);
+}
+
+/* ---------- Statistiques ---------- */
+.carte-record {
+  padding: var(--esp-6) var(--esp-4);
+  text-align: center;
+}
+.carte-record__titre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-2);
+  font-size: var(--taille-l);
+  text-transform: uppercase;
+}
+.carte-record__titre svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--vert);
+}
+.carte-record__equipe {
+  flex-direction: column;
+  font-size: var(--taille-l);
+}
+.carte-record__valeur {
+  margin: var(--esp-2) 0 0;
+  font-family: var(--police-titre);
+  font-size: var(--taille-3xl);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--vert);
+}
+.carte-record__valeur span {
+  font-size: var(--taille-m);
+  color: var(--encre-2);
+}
+.carte-record__detail {
+  margin: var(--esp-1) 0 0;
+  font-size: var(--taille-s);
+  color: var(--encre-2);
+}
+
+/* ---------- Administration ---------- */
+.barre-admin {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-2);
+  margin-bottom: var(--esp-6);
+  padding: var(--esp-1) var(--esp-1) var(--esp-1) var(--esp-4);
+  font-size: var(--taille-s);
+  background: var(--surface);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+}
+.barre-admin__utilisateur {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+}
+.barre-admin__utilisateur svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--vert);
+}
+
+.connexion {
+  display: grid;
+  place-items: center;
+  padding: var(--esp-8) 0;
+}
+.connexion__carte {
+  width: 100%;
+  max-width: 26rem;
+}
+.connexion__titre {
+  margin-bottom: var(--esp-1);
+  text-transform: uppercase;
+}
+.connexion__icone {
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-right: var(--esp-1);
+  vertical-align: -2px;
+}
+.connexion__erreur {
+  margin-bottom: var(--esp-4);
+  padding: var(--esp-3);
+  background: var(--rouge-pale);
+  border-radius: var(--rayon);
+}
+
+.barre-progression {
+  height: 0.75rem;
+  overflow: hidden;
+  background: var(--surface-2);
+  border-radius: var(--rayon-pastille);
+}
+.barre-progression span {
+  display: block;
+  height: 100%;
+  background: var(--vert);
+  border-radius: inherit;
+}
+
+.actions-ligne {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: var(--esp-2);
+}
+
+.tableau tbody tr.ligne--selectionnee > * {
+  background: var(--vert-pale);
+}
+
+.formulaire-admin {
+  margin-bottom: var(--esp-6);
+  border-color: var(--vert);
+}
+@media (min-width: 640px) {
+  .formulaire-admin__champs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .formulaire-admin__champs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Saisie de résultat : une colonne par équipe dès 1024 px */
+.saisie {
+  display: grid;
+  gap: var(--esp-4);
+  margin-bottom: var(--esp-6);
+}
+@media (min-width: 1024px) {
+  .saisie { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Bloc simple (une grille sur <fieldset> placerait mal la légende selon les navigateurs) */
+.saisie__colonne {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: var(--esp-4);
+}
+.saisie__colonne > * + * {
+  margin-top: var(--esp-6);
+}
+
+/* La légende sort du cadre par défaut : on la remet dans le flux */
+.saisie__equipe {
+  display: flex;
+  float: left;
+  width: 100%;
+  margin: 0;
+  align-items: center;
+  gap: var(--esp-3);
+  padding: 0;
+  font-family: var(--police-titre);
+  font-size: var(--taille-xl);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.saisie__equipe .surtitre {
+  display: block;
+  font-family: var(--police-texte);
+}
+.saisie__equipe + * {
+  clear: both;
+  margin-top: 0;
+  padding-top: var(--esp-6);
+}
+
+.saisie__score .champ__controle {
+  max-width: 10rem;
+  font-family: var(--police-titre);
+  font-size: var(--taille-xl);
+  font-weight: 700;
+}
+
+.saisie__groupe {
+  display: grid;
+  gap: var(--esp-3);
+  justify-items: start;
+}
+.saisie__groupe > .champ__erreur {
+  margin: 0;
+}
+
+.saisie__sous-titre {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  margin: 0;
+  font-size: var(--taille-l);
+  text-transform: uppercase;
+}
+.saisie__sous-titre svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--vert);
+}
+
+/* Ligne buteur : joueur | minute | retirer ; carton : joueur sur toute la largeur, puis couleur | minute | retirer */
+.saisie__ligne {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 7.5rem auto;
+  align-items: start;
+  gap: var(--esp-2);
+  width: 100%;
+  padding-bottom: var(--esp-3);
+  border-bottom: 1px dashed var(--bordure);
+}
+.saisie__ligne--carton {
+  grid-template-columns: minmax(0, 1fr) 7.5rem auto;
+}
+.saisie__ligne--carton > :first-child {
+  grid-column: 1 / -1;
+}
+@media (min-width: 640px) {
+  .saisie__ligne--carton { grid-template-columns: minmax(0, 1fr) 7rem 7.5rem auto; }
+  .saisie__ligne--carton > :first-child { grid-column: auto; }
+}
+.saisie__retirer {
+  margin-top: 1.6rem;
+  color: var(--rouge-texte);
+}
+.saisie__ligne--carton .saisie__retirer {
+  grid-column: auto;
+}
+
+.saisie__actions {
+  justify-content: flex-end;
+}

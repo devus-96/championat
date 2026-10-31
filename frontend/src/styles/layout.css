@@ -1,0 +1,488 @@
+/* ==========================================================================
+   layout.css : en-tête, navigation, contenu principal, pied de page, grilles
+   Points de rupture : 640 px (tablette) et 1024 px (bureau)
+   ========================================================================== */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- En-tête collant ---------- */
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  color: var(--sur-fonce);
+  background: var(--vert-fonce);
+  border-bottom: 3px solid var(--jaune);
+}
+
+.entete__barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-4);
+  max-width: var(--largeur-max);
+  min-height: var(--hauteur-entete);
+  margin: 0 auto;
+  padding: 0 var(--esp-4);
+}
+
+/* Logo + nom du championnat */
+.marque {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  min-height: var(--cible-tactile);
+  color: var(--sur-fonce);
+  text-decoration: none;
+}
+.marque:hover {
+  color: var(--sur-fonce);
+}
+
+.marque__logo {
+  width: 2rem;
+  height: 2rem;
+}
+
+.marque__texte {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.marque__nom {
+  font-family: var(--police-titre);
+  font-size: var(--taille-l);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.marque__saison {
+  font-size: var(--taille-xs);
+  color: var(--sur-fonce-2);
+}
+
+/* Bouton hamburger : visible uniquement sous 640 px */
+.entete__menu {
+  color: var(--sur-fonce);
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 0.35);
+}
+.entete__menu:hover {
+  background: rgb(255 255 255 / 0.1);
+}
+
+/* ---------- Navigation principale ---------- */
+/* Mobile : panneau déroulant sous l'en-tête */
+.navigation {
+  display: none;
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.navigation--ouverte {
+  display: block;
+}
+
+.navigation__liste {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: var(--esp-2) var(--esp-4) var(--esp-4);
+  list-style: none;
+}
+
+.navigation__lien {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  min-height: var(--cible-tactile);
+  padding: 0 var(--esp-3);
+  font-weight: 600;
+  color: var(--sur-fonce-2);
+  text-decoration: none;
+  border-radius: var(--rayon);
+  transition: color var(--duree) var(--courbe), background-color var(--duree) var(--courbe);
+}
+
+.navigation__lien svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.navigation__lien:hover {
+  color: var(--sur-fonce);
+  background: rgb(255 255 255 / 0.08);
+}
+
+.navigation__lien[aria-current='page'] {
+  color: var(--sur-fonce);
+  background: rgb(255 255 255 / 0.1);
+  box-shadow: inset 3px 0 0 var(--jaune);
+}
+
+/* Lien Admin : discret, séparé du reste */
+.navigation__element--admin {
+  margin-top: var(--esp-2);
+  padding-top: var(--esp-2);
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.navigation__lien--admin {
+  font-size: var(--taille-s);
+  font-weight: 500;
+}
+
+/* 640 px et plus : la navigation devient une barre horizontale sous la marque */
+@media (min-width: 640px) {
+  .entete .entete__menu { /* spécificité renforcée : .bouton (composants.css) est chargé après */
+    display: none;
+  }
+
+  .navigation {
+    display: block;
+  }
+
+  .navigation__liste {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--esp-1);
+    padding: 0 var(--esp-2);
+  }
+
+  .navigation__lien {
+    gap: var(--esp-2);
+    padding: 0 var(--esp-2);
+    font-size: var(--taille-s);
+    border-radius: 0;
+  }
+
+  .navigation__lien svg {
+    display: none;
+  }
+
+  .navigation__lien:hover {
+    background: transparent;
+  }
+
+  /* Onglet actif : barre jaune collée à la bordure de l'en-tête */
+  .navigation__lien[aria-current='page'] {
+    background: transparent;
+    box-shadow: inset 0 -3px 0 var(--jaune);
+  }
+
+  .navigation__element--admin {
+    margin: 0 0 0 auto;
+    padding: 0;
+    border: 0;
+  }
+
+  .navigation__lien--admin svg {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+/* 1024 px et plus : marque et navigation sur une seule ligne */
+@media (min-width: 1024px) {
+  .entete__interieur {
+    display: flex;
+    align-items: stretch;
+    max-width: var(--largeur-max);
+    margin: 0 auto;
+  }
+
+  .entete__barre {
+    flex: none;
+    margin: 0;
+  }
+
+  .navigation {
+    flex: 1;
+    border-top: 0;
+  }
+
+  .navigation__liste {
+    height: 100%;
+    padding-right: var(--esp-4);
+  }
+
+  .navigation__lien {
+    height: var(--hauteur-entete);
+    padding: 0 var(--esp-3);
+  }
+}
+
+/* ---------- Contenu principal ---------- */
+.contenu {
+  flex: 1;
+  width: 100%;
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: var(--esp-6) var(--esp-4) var(--esp-12);
+}
+
+.contenu:focus {
+  outline: none;
+}
+
+/* Contenu pleine largeur (le hero de l'accueil gère ses marges) */
+.contenu--plein {
+  max-width: none;
+  padding: 0 0 var(--esp-12);
+}
+
+.contenu--plein > .conteneur {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: 0 var(--esp-4);
+}
+
+/* En-tête de page standard : surtitre + h1 + actions */
+.entete-page {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--esp-4);
+  margin-bottom: var(--esp-6);
+}
+
+.entete-page__titre {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.entete-page__intro {
+  margin: var(--esp-1) 0 0;
+  color: var(--encre-2);
+}
+
+.entete-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+  align-items: flex-end;
+}
+
+/* Fil d'Ariane / lien retour */
+.retour {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  min-height: var(--cible-tactile);
+  margin-bottom: var(--esp-2);
+  font-size: var(--taille-s);
+  font-weight: 600;
+  text-decoration: none;
+}
+.retour svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ---------- Grilles ---------- */
+.grille {
+  display: grid;
+  gap: var(--esp-4);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .grille {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grille--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Accueil : 3 blocs (matchs | classement | buteurs) */
+.grille-accueil {
+  display: grid;
+  gap: var(--esp-6);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .grille-accueil {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  }
+  .grille-accueil > :first-child {
+    grid-row: span 2;
+  }
+}
+
+/* ---------- Bandeau d'accueil (hero) ---------- */
+.hero {
+  position: relative;
+  margin-bottom: var(--esp-8);
+  overflow: hidden;
+  color: var(--sur-fonce);
+  background: var(--vert-fonce);
+}
+
+/* Lignes de terrain très discrètes en fond (motif thématique, pas décoratif gratuit) */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 78% 50%, transparent 0 7.5rem, rgb(255 255 255 / 0.06) 7.5rem 7.6rem, transparent 7.6rem),
+    linear-gradient(90deg, transparent calc(78% - 1px), rgb(255 255 255 / 0.06) calc(78% - 1px) 78%, transparent 78%),
+    linear-gradient(180deg, var(--vert-fonce) 0%, var(--vert-fonce-2) 100%);
+  pointer-events: none;
+}
+
+.hero__interieur {
+  position: relative;
+  display: grid;
+  gap: var(--esp-6);
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: var(--esp-8) var(--esp-4);
+}
+
+@media (min-width: 1024px) {
+  .hero__interieur {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+    align-items: center;
+    padding: var(--esp-12) var(--esp-4);
+  }
+}
+
+.hero__surtitre {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  margin: 0 0 var(--esp-3);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--jaune);
+}
+
+.hero__titre {
+  margin: 0 0 var(--esp-3);
+  font-size: 2.5rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .hero__titre {
+    font-size: 3.5rem;
+  }
+}
+
+.hero__titre-accent {
+  color: var(--jaune);
+}
+
+.hero__texte {
+  max-width: 34rem;
+  margin: 0 0 var(--esp-6);
+  color: var(--sur-fonce-2);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+}
+
+/* ---------- Pied de page ---------- */
+.pied {
+  color: var(--sur-fonce-2);
+  background: var(--vert-fonce);
+  border-top: 3px solid var(--jaune);
+  font-size: var(--taille-s);
+}
+
+.pied__interieur {
+  display: grid;
+  gap: var(--esp-6);
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: var(--esp-8) var(--esp-4);
+}
+
+@media (min-width: 640px) {
+  .pied__interieur {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+}
+
+.pied__nom {
+  margin: 0 0 var(--esp-1);
+  font-family: var(--police-titre);
+  font-size: var(--taille-l);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--sur-fonce);
+}
+
+.pied__mention {
+  margin: 0;
+}
+
+.pied__liens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--esp-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pied__liens a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--cible-tactile);
+  color: var(--sur-fonce-2);
+  text-decoration: none;
+}
+
+.pied__liens a:hover {
+  color: var(--sur-fonce);
+  text-decoration: underline;
+}
+
+.pied__bas {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: var(--esp-4);
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+  font-size: var(--taille-xs);
+}
+
+/* ---------- Variante admin : même identité, plus sobre ---------- */
+.page--admin .entete {
+  background: var(--encre);
+  border-bottom-color: var(--vert);
+}
+
+.page--admin .marque__saison {
+  color: var(--jaune);
+}
+
+.page--admin .navigation__lien[aria-current='page'] {
+  box-shadow: inset 0 -3px 0 var(--jaune);
+}
+
+@media (max-width: 639px) {
+  .page--admin .navigation__lien[aria-current='page'] {
+    box-shadow: inset 3px 0 0 var(--jaune);
+  }
+}
